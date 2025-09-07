@@ -7,7 +7,8 @@
     "frontend",
     "backend",
     "realtime",
-    "files"
+    "files",
+    "shared"
   ],
   "scripts": {
     "prepare": "husky || true",

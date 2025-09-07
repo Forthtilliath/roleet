@@ -1,16 +1,17 @@
+import type { Entities } from "@roleet/shared";
 import { useEffect, useState } from "react";
-import type { Entities } from "@/types/entities";
+import type { ChatSocket } from "@/types/socket";
 import { useSocket } from "./useSocket";
 
-export function useChat(room: string, initialMessages: Entities.Message[]) {
+export function useChat(room: string, initialMessages: Entities.MessageChat[]) {
   const { socket, isConnected } = useSocket<
-    ServerToClientEvents,
-    ClientToServerEvents
+    ChatSocket.ServerToClientEvents,
+    ChatSocket.ClientToServerEvents
   >();
   const [messages, setMessages] = useState(initialMessages);
 
-  const sendMessage = (
-    message: Omit<Entities.Message, "id" | "createdAt"> & { channel: string },
+  const sendMessage: ChatSocket.ClientToServerEvents["send_message"] = (
+    message,
   ) => {
     if (!socket) return;
     socket.emit("send_message", { ...message, campaign: room });

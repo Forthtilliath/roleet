@@ -5,6 +5,9 @@ import type {
   GetScenarioQuery,
 } from "@/lib/graphql/generated/graphql-types";
 
+// TODO: Remove it when all merge is done
+// @see shared\src\types\entities.ts
+
 declare namespace Entities {
   type Scenario = GetScenarioQuery["getScenario"];
   type Flashcard = Scenario["flashcards"][number];
